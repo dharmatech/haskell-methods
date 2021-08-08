@@ -53,3 +53,15 @@ Similar for `a` and `c`:
 And `b` and `c`:
 
     bc = b.distance c
+
+# Trying it out
+
+The new `RecordDotSyntax` feature is available in [GHC 9.2.1-alpha2](https://www.haskell.org/ghc/blog/20210422-ghc-9.2.1-alpha2-relased.html).
+
+See the file [point.hs](point.hs) for the full example shown above. It can be loaded into ghc-9.2.1-alpha2 via:
+
+    $ ghci point.hs
+
+# Other approaches
+
+Feel free to comment in the issues if you have suggestions for other approaches to implementing this sort of thing.
