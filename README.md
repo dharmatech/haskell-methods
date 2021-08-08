@@ -1,6 +1,6 @@
 # Methods in Haskell
 
-One of the things I really miss from C# when using Haskell is the dot-syntax for properties and methods. I like dot-syntax for methods for a few reasons
+One of the things I really miss from C# when using Haskell is the dot-syntax for properties and methods. I like dot-syntax for methods for a few reasons:
 
 - Explorability of the language. You type `xyz.` and the IDE shows you what operations are available on `xyz` via IntelliSense.
 - Namespace management
