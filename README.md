@@ -69,3 +69,39 @@ Feel free to comment in the issues if you have suggestions for other approaches 
 # Feedback
 
 See this [r/haskell thread](https://www.reddit.com/r/haskell/comments/p0pclw/haskell_methods/) for some discussion.
+
+# Update
+
+User *friedbrice* made some suggestions in [this thread](https://www.reddit.com/r/haskell/comments/p0pclw/haskell_methods/h89atjy?utm_source=share&utm_medium=web2x&context=3).
+
+Here's an implementation based on his suggestions which implements methods for `distance`, `length`, `div_n`, and `norm`:
+
+```haskell
+{-# LANGUAGE OverloadedRecordDot, OverloadedRecordUpdate, DuplicateRecordFields #-}
+{-# LANGUAGE RecordWildCards #-}
+----------------------------------------------------------------------
+data Point = Point { 
+    x :: Double, 
+    y :: Double, 
+    distance :: Point -> Double, 
+    length :: Double,
+    div_n :: Double -> Point,
+    norm :: Point
+}
+
+instance Show Point where
+    show p = "Point { x = " ++ show p.x ++ ", y = " ++ show p.y ++ " }"
+----------------------------------------------------------------------
+make_point :: Double -> Double -> Point
+make_point x y =
+  let
+    distance b = sqrt ((b.x - x)^2 + (b.y - y)^2)
+    length = sqrt (x^2 + y^2)
+    div_n n = make_point (x/n) (y/n)
+    norm = div_n length
+    this = Point {..}
+  in
+    this
+----------------------------------------------------------------------
+```
+
