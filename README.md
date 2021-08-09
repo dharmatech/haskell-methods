@@ -79,7 +79,7 @@ Here's an implementation based on his suggestions which implements methods for `
 ```haskell
 {-# LANGUAGE OverloadedRecordDot, OverloadedRecordUpdate, DuplicateRecordFields #-}
 {-# LANGUAGE RecordWildCards #-}
-----------------------------------------------------------------------
+
 data Point = Point { 
     x :: Double, 
     y :: Double, 
@@ -91,7 +91,7 @@ data Point = Point {
 
 instance Show Point where
     show p = "Point { x = " ++ show p.x ++ ", y = " ++ show p.y ++ " }"
-----------------------------------------------------------------------
+
 make_point :: Double -> Double -> Point
 make_point x y =
   let
@@ -102,6 +102,41 @@ make_point x y =
     this = Point {..}
   in
     this
-----------------------------------------------------------------------
 ```
+
+# Update - `HasField`
+
+User *Dark_Ethereal* [suggested a completely different approach](https://www.reddit.com/r/haskell/comments/p0pclw/haskell_methods/h89gmkg?utm_source=share&utm_medium=web2x&context=3) based on `HasField`.
+
+Here's an implementation based on his suggestions:
+
+```haskell
+{-# LANGUAGE OverloadedRecordDot, OverloadedRecordUpdate, DuplicateRecordFields #-}
+{-# LANGUAGE DataKinds #-}
+
+import GHC.Records
+
+data Point = Point { x :: Double, y :: Double }
+
+instance Show Point where
+    show p = "Point { x = " ++ show p.x ++ ", y = " ++ show p.y ++ " }"
+
+instance HasField "distance" Point (Point -> Double) where
+  getField a b = sqrt ((b.x - a.x)^2 + (b.y - a.y)^2)
+
+instance HasField "length" Point (Double) where
+  getField a = sqrt (a.x^2 + a.y^2)
+
+instance HasField "div_n" Point (Double -> Point) where
+  getField a n = Point (a.x / n) (a.y / n)
+
+instance HasField "norm" Point (Point) where
+  getField a = a.div_n a.length
+```
+
+## Past discussion
+
+This approach has been explored in the post [Stealing Impl from Rust](https://www.parsonsmatt.org/2021/07/29/stealing_impl_from_rust.html). [Reddit discussion](https://www.reddit.com/r/haskell/comments/ousrpy/stealing_impl_from_rust/).
+
+See also: https://github.com/ElderEphemera/instance-impl
 
