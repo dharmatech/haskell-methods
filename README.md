@@ -65,3 +65,7 @@ See the file [point.hs](point.hs) for the full example shown above. It can be lo
 # Other approaches
 
 Feel free to comment in the issues if you have suggestions for other approaches to implementing this sort of thing.
+
+# Feedback
+
+See this [r/haskell thread](https://www.reddit.com/r/haskell/comments/p0pclw/haskell_methods/) for some discussion.
