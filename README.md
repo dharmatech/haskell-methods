@@ -102,6 +102,26 @@ make_point x y =
     this = Point {..}
   in
     this
+
+-- Example expressions:
+
+a = make_point 0.0 0.0
+b = make_point 1.0 1.0
+c = make_point 3.0 3.0
+
+ab = a.distance b
+
+ac = a.distance c
+
+bc = b.distance c
+
+result_distance = (make_point 1.0 1.0).distance (make_point 10.0 10.0)
+
+result_length = b.length
+
+result_div_n = c.div_n c.length
+
+result_norm = c.norm
 ```
 
 # Update - `HasField`
@@ -132,6 +152,26 @@ instance HasField "div_n" Point (Double -> Point) where
 
 instance HasField "norm" Point (Point) where
   getField a = a.div_n a.length
+
+-- Example expressions:
+
+a = Point 0 0
+b = Point 1 1
+c = Point 3 3
+
+ab = a.distance b
+
+ac = a.distance c
+
+bc = b.distance c
+
+result_distance = (Point 1 1).distance (Point 10 10)
+
+result_length = b.length
+
+result_div_n = c.div_n c.length
+
+result_norm = c.norm
 ```
 
 ## Past discussion
