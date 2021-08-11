@@ -180,3 +180,21 @@ This approach has been explored in the post [Stealing Impl from Rust](https://ww
 
 See also: https://github.com/ElderEphemera/instance-impl
 
+# Update 2021-08-11 - Record Update Issue
+
+User *Historical_Emphasis7* [makes the following observation](https://www.reddit.com/r/haskell/comments/p0pclw/haskell_methods/h8gm5mg?utm_source=share&utm_medium=web2x&context=3):
+
+> In Example 1. Wouldn't the distance function break if the record was updated?
+> 
+> ```haskell
+> p = make_point 1.0 1.0
+> p' = p {y = 10}
+> ```
+
+This appears to be an issue for the first approach mentioned above as well as the [enhanced approach](https://github.com/dharmatech/haskell-methods/blob/master/README.md#update) described by *friedbrice*.
+
+However, the [HasField approach](https://github.com/dharmatech/haskell-methods/blob/master/README.md#update---hasfield) appears to work fine with updates.
+
+That said, technically, I haven't been able to test this out due to the following issue:
+
+[Updating a record using RecordDotSyntax results in an error](https://stackoverflow.com/q/68707198/268581)
