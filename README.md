@@ -199,7 +199,7 @@ That said, technically, I haven't been able to test this out due to the followin
 
 [Updating a record using RecordDotSyntax results in an error](https://stackoverflow.com/q/68707198/268581)
 
-# Update 2021-08-12 - Downside: fluent interface ergonomics
+# Update 2021-08-12 - Fluent interface ergonomics
 
 In languages with method-syntax, [fluent interfaces](https://en.wikipedia.org/wiki/Fluent_interface) are common.
 
