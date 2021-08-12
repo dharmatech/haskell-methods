@@ -198,3 +198,45 @@ However, the [HasField approach](https://github.com/dharmatech/haskell-methods/b
 That said, technically, I haven't been able to test this out due to the following issue:
 
 [Updating a record using RecordDotSyntax results in an error](https://stackoverflow.com/q/68707198/268581)
+
+# Update 2021-08-12 - Downside: fluent interface ergonomics
+
+In languages with method-syntax, [fluent interfaces](https://en.wikipedia.org/wiki/Fluent_interface) are common.
+
+Using the `div_n` method from the `HasField` approach mentioned above, a method chain in C# might look like this:
+
+```csharp
+var result = c.div_n(2)
+    .div_n(3)
+    .div_n(4)
+```
+
+Of course, the naive translation to Haskell:
+
+```haskell
+result =
+  c.div_n 2
+    .div_n 3
+    .div_n 4
+```
+
+doesn't work due to precedence issues.
+
+If we add parenthesis, it get's messy:
+
+```haskell
+result =
+  (((c.div_n 2)
+    .div_n 3)
+    .div_n 4)
+```
+
+and actually still doesn't work because it seems that whitespace is not allowed around the dot!
+
+So, we're forced to do the following it seems:
+
+```haskell
+result = (((c.div_n 2).div_n 3).div_n 4)
+```
+
+Which is defintely quite awkward... This is a huge ergonomic downside for methods-via-dot-syntax.
